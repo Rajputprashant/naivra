@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/naivra/static/css/main.2a0fb298.css",
-    "main.js": "/naivra/static/js/main.2e920f0a.js",
+    "main.js": "/naivra/static/js/main.648e8d00.js",
     "index.html": "/naivra/index.html",
     "main.2a0fb298.css.map": "/naivra/static/css/main.2a0fb298.css.map",
-    "main.2e920f0a.js.map": "/naivra/static/js/main.2e920f0a.js.map"
+    "main.648e8d00.js.map": "/naivra/static/js/main.648e8d00.js.map"
   },
   "entrypoints": [
     "static/css/main.2a0fb298.css",
-    "static/js/main.2e920f0a.js"
+    "static/js/main.648e8d00.js"
   ]
 }
