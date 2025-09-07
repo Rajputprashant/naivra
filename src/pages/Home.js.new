@@ -1,0 +1,72 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+const sampleProducts = [
+  {
+    id: 1,
+    name: 'Elegant Persian Carpet',
+    price: 1200,
+    specs: 'Handmade, Wool, 8x10ft',
+    image: 'https://images.unsplash.com/photo-1584285418404-d082b017b64c?w=600&h=400&fit=crop',
+    description: 'Luxurious handwoven Persian carpet with intricate traditional patterns.'
+  },
+  {
+    id: 2,
+    name: 'Modern Geometric Rug',
+    price: 900,
+    specs: 'Machine-made, Nylon, 5x7ft',
+    image: 'https://images.unsplash.com/photo-1600166898405-da9535204843?w=600&h=400&fit=crop',
+    description: 'Contemporary geometric design perfect for modern interiors.'
+  },
+  {
+    id: 3,
+    name: 'Vintage Floral Carpet',
+    price: 1500,
+    specs: 'Handmade, Silk, 10x14ft',
+    image: 'https://images.unsplash.com/photo-1582897085656-c636d006a246?w=600&h=400&fit=crop',
+    description: 'Classic floral patterns with rich colors and premium silk material.'
+  },
+];
+
+const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
+
+  useEffect(() => {
+    const tempProducts = sampleProducts.filter(p => 
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      p.specs.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(tempProducts);
+  }, [searchTerm]);
+
+  return (
+    <div className="home-container">
+      <header>Naivra</header>
+      <div className="search-container">
+        <input 
+          type="text" 
+          placeholder="Search carpets..." 
+          value={searchTerm} 
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
+      <div className="product-grid">
+        {filteredProducts.map((product) => (
+          <Link to={`/product/${product.id}`} key={product.id} className="product-card">
+            <img src={product.image} alt={product.name} className="product-image" />
+            <div className="product-info">
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-specs">{product.specs}</p>
+              <p className="product-description">{product.description}</p>
+              <p className="product-price">${product.price}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Home;

@@ -1,0 +1,120 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const AddProduct = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    specs: '',
+    description: '',
+    image: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const products = JSON.parse(localStorage.getItem('naivra-products') || '[]');
+    const newProduct = {
+      id: products.length + 1,
+      ...formData,
+      price: parseFloat(formData.price)
+    };
+    products.push(newProduct);
+    localStorage.setItem('naivra-products', JSON.stringify(products));
+    alert('Carpet added successfully!');
+    navigate('/');
+  };
+
+  return (
+    <div className="add-product-container">
+      <header>Add New Carpet</header>
+      <form onSubmit={handleSubmit} className="add-product-form">
+        <div className="form-group">
+          <label htmlFor="name">Carpet Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="e.g., Elegant Persian Carpet"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="price">Price ($)</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+            min="0"
+            step="0.01"
+            placeholder="e.g., 1200"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="specs">Specifications</label>
+          <input
+            type="text"
+            id="specs"
+            name="specs"
+            value={formData.specs}
+            onChange={handleChange}
+            required
+            placeholder="e.g., Handmade, Wool, 8x10ft"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            placeholder="Detailed description of the carpet..."
+            rows="4"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Image URL</label>
+          <input
+            type="url"
+            id="image"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            required
+            placeholder="https://example.com/carpet-image.jpg"
+          />
+        </div>
+
+        <div className="form-actions">
+          <button type="button" onClick={() => navigate('/')} className="cancel-button">
+            Cancel
+          </button>
+          <button type="submit" className="submit-button">
+            Add Carpet
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddProduct;
