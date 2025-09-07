@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/naivra/static/css/main.2a0fb298.css",
+    "main.js": "/naivra/static/js/main.a2ff2b72.js",
+    "index.html": "/naivra/index.html",
+    "main.2a0fb298.css.map": "/naivra/static/css/main.2a0fb298.css.map",
+    "main.a2ff2b72.js.map": "/naivra/static/js/main.a2ff2b72.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a0fb298.css",
+    "static/js/main.a2ff2b72.js"
+  ]
+}
