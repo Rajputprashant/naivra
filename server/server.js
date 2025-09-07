@@ -7,11 +7,20 @@ const fs = require('fs');
 const app = express();
 
 // Enable CORS with specific options
+const allowedOrigins = ['http://localhost:3000', 'https://rajputprashant.github.io'];
+
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type']
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow requests like curl or Postman with no origin
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy does not allow access from this origin.'), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
 }));
+
 
 // Create media directory if it doesn't exist
 const mediaDir = path.join(__dirname, '../public/media');
